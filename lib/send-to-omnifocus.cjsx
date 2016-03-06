@@ -1,4 +1,4 @@
-{React, Actions, DraftStore, ContactStore, AccountStore} = require 'nylas-exports'
+{React, Actions, Message, DraftStore, ContactStore, AccountStore, DatabaseStore} = require 'nylas-exports'
 
 mailDropSuffix = "@sync.omnigroup.com"
 
@@ -12,14 +12,19 @@ class SendToOmnifocus extends React.Component
       @forceUpdate()
 
   handleClick: =>
-    unsubscribe = DraftStore.listen (draft) =>
-      mail = draft.objects[0]
-      link = @gmailLink()
-      mail.to = [@omnifocusContact]
-      mail.body = "<a href='#{link}'>#{link}</a><br><br>#{mail.body}"
-      unsubscribe()
+    gmailLink = @gmailLink()
+    [_, ..., lastMessage] = @thread().metadata
+    message = new Message
+      draft: true
+      to: [@omnifocusContact]
+      from: [@account().defaultMe()]
+      subject: @thread().subject
+      body: "<a href='#{gmailLink}'>#{gmailLink}</a><br><br>#{lastMessage.snippet}"
 
-    Actions.composeForward(threadId: @thread().serverId)
+    DatabaseStore.inTransaction (t) =>
+      t.persistModel(message)
+    .then =>
+      Actions.composePopoutDraft(message.clientId)
 
   thread: =>
     @props.thread
@@ -28,8 +33,11 @@ class SendToOmnifocus extends React.Component
     @thread().subject
 
   gmailLink: =>
-    email = AccountStore.accountForItems([@thread()]).emailAddress
+    email = @account().emailAddress
     "https://mail.google.com/mail/u/#{email}/#search/#{encodeURIComponent(@thread().subject)}"
+
+  account: =>
+    AccountStore.accountForItems([@thread()])
 
   render: =>
     return <span></span> unless @omnifocusContact?
