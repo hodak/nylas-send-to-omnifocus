@@ -12,9 +12,9 @@ Bonus value when you use Gmail - it will include a link to search for the e-mail
 2. Add your Mail Drop address to your contacts in your e-mail.
 3. Install plugin:
 
-```
-$ git clone https://github.com/hodak/nylas-send-to-omnifocus.git ~/.nylas/packages/nylas-send-to-omnifocus
-```
+  ```
+  $ git clone https://github.com/hodak/nylas-send-to-omnifocus.git ~/.nylas/packages/nylas-send-to-omnifocus
+  ```
 
 4. Restart Nylas. Make sure e-mail (and contacts) are synced, otherwise `Omnifocus` button won't show up.
 
