@@ -1,6 +1,6 @@
 # nylas-send-to-omnifocus
 
-Small plugin that adds button in toolbar to send e-mail to Omnifocus' inbox, using its [MailDrop](https://support.omnigroup.com/omnifocus-mail-drop/) feature.
+Small plugin that adds button in toolbar to send e-mail's snippet to Omnifocus' inbox, using its [MailDrop](https://support.omnigroup.com/omnifocus-mail-drop/) feature.
 
 Bonus value when you use Gmail - it will include a link to search for the e-mail by subject (unfortunately, I haven't found a way to link directly to the e-mail - if you have any idea how to do it please let me know).
 
