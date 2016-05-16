@@ -9,7 +9,7 @@
   "engines": {
     "nylas": ">=0.4.10-4e3595b"
   },
-  "description": "Enter a description of your package!",
+  "description": "Send email to Omnifocus",
   "dependencies": {},
   "license": "MIT"
 }
