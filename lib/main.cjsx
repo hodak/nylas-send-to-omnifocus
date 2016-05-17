@@ -8,7 +8,7 @@ module.exports =
   #
   activate: (@state) ->
     ComponentRegistry.register SendToOmnifocus,
-      role: 'message:Toolbar'
+      role: 'ThreadActionsToolbarButton'
 
   # Serialize is called when your package is about to be unmounted.
   # You can return a state object that will be passed back to your package
